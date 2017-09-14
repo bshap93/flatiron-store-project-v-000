@@ -2,7 +2,7 @@
     <ul>
         <li> <%= link_to "Store Home", store_path %> </li>
         <% if !!@cart %>
-          <li> <%= link_to "Cart", cart_path(current_cart) %></li>
+          <li> <%= link_to "Cart", cart_path(@cart) %></li>
         <% end %>
     </ul>
 </nav>

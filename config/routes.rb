@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'users_controller/sign_out'
+
+  devise_for :users
   root 'store#index', as: 'store'
 
   resources :items, only: [:show, :index]

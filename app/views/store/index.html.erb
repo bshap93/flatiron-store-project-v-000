@@ -1,7 +1,25 @@
+<% if !signed_in? %>
+<p>
+  <%= link_to "sign in", new_user_session_path %>  or
+  <%= link_to "Sign up", new_user_registration_path %>
+</p>
+<% else %>
+  <p>
+    Signed in as <%= current_user.email %>
+    <p>
+      <%= button_to "New Cart", '/carts', action: "create" %>
+      <% if current_user.current_cart %>
+        <%= link_to "Current Cart", cart_path(current_user.current_cart) %>
+      <% end %>
+    </p>
+    <%= link_to "Sign out", destroy_user_session_path %>
+  </p>
+<% end %>
+
 <% @categories.each do |category| %>
   <%= link_to category.title, category_path(category) %>
 <% end %>
 
 <% @items.each do |item| %>
-  <p><%= item.title %> | <%= number_to_currency(item.price) %> | <%= button_to 'Add to Cart', line_items_path(item_id: item) %></p>
+  <p><%= item.title %> | Price $<%= item.price.to_f/100 %> | <%= button_to 'Add to Cart', line_items_path(item_id: item) %></p>
 <% end %>
